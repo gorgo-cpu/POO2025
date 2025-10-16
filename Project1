@@ -1,0 +1,145 @@
+//Constantin George Tanase 1157 ID 
+// Domeniul ales este Imbracaminte, iar clasele sunt: Geaca, Cardigan, Cingatoare
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+
+enum Model {
+	BOMBER, PLOAIE, BLUGI
+};
+
+class Geaca {
+public:
+	int serie;
+	char* colectie = nullptr;
+	Model model;
+	float pret;
+
+	Geaca() {
+		const char* defaultColectie = "Martie";
+		serie = 1;
+		colectie = new char[strlen(defaultColectie) + 1];
+		strcpy_s(colectie, strlen(defaultColectie) +1, defaultColectie);
+		this->model = BOMBER;
+		this->pret = 100.0;
+	}
+
+	Geaca(int serie, const char * colectie, Model model, float pret) {
+		this->serie = serie;
+		this->colectie = new char[strlen(colectie) + 1];
+		strcpy_s(this->colectie, strlen(colectie) + 1, colectie);
+		this->model = model;
+		this->pret = pret;
+	}
+
+	void afisare() {
+		cout << "Face parte din Colectia: " << this->colectie << endl;
+		cout << "Are Seria: " << this->serie << endl;
+		cout << "Este Modelul: " << this->model << endl;
+		cout << "Si are Pretul de: " << this->pret << " RON" << endl;
+	}
+};
+
+enum matCardigan {
+	MIXT, POLYESTER, COTON
+};
+
+class Cardigan {
+public:
+	int serie;
+	char* colectie = nullptr;
+	matCardigan material;
+	float pret;
+	Cardigan() {
+		const char* defaultColectie = "Aprilie";
+		serie = 1;
+		colectie = new char[strlen(defaultColectie) + 1];
+		strcpy_s(colectie, strlen(defaultColectie) + 1, defaultColectie);
+		this->material = MIXT;
+		this->pret = 60.0;
+	}
+	Cardigan(int serie, const char* colectie,matCardigan material, float pret) {
+		this->serie = serie;
+		this->colectie = new char[strlen(colectie) + 1];
+		strcpy_s(this->colectie, strlen(colectie) + 1, colectie);
+		this->material = material;
+		this->pret = pret;
+	}
+	void afisare() {
+		cout << "Face parte din Colectia: " << this->colectie << endl;
+		cout << "Are Seria: " << this->serie << endl;
+		cout << "Este facut din: " << this->material << endl;
+		cout << "Si are Pretul de: " << this->pret << " RON" << endl;
+	}
+};
+
+enum matCingatoare {
+	BUMBAC, PIELE, LANA
+};
+
+class Cingatoare {
+public:
+	int serie;
+	char* colectie = nullptr;
+	matCingatoare materialC;
+	float pret;
+	Cingatoare() {
+		const char* defaultColectie = "Traditional";
+		serie = 1;
+		colectie = new char[strlen(defaultColectie) + 1];
+		strcpy_s(colectie, strlen(defaultColectie) + 1, defaultColectie);
+		this->materialC = BUMBAC;
+		this->pret = 60.0;
+	}
+	Cingatoare(int serie, const char* colectie, matCingatoare material, float pret) {
+		this->serie = serie;
+		this->colectie = new char[strlen(colectie) + 1];
+		strcpy_s(this->colectie, strlen(colectie) + 1, colectie);
+		this->materialC = material;
+		this->pret = pret;
+	}
+	void afisare() {
+		cout << "Face parte din Colectia: " << this->colectie << endl;
+		cout << "Are Seria: " << this->serie << endl;
+		cout << "Este facut din: " << this->materialC << endl;
+		cout << "Si are Pretul de: " << this->pret << " RON" << endl;
+	}
+};
+
+int main() {
+	cout << "-----------DOMENIUL ALES : IMBRACAMINTE-----------" << endl;
+	cout << endl << "-----------PRIMUL OBIECT-----------" << endl;
+	cout << "Geaca 1 " << endl;
+	Geaca g; 
+	g.afisare();
+	cout << endl << "Geaca 2 " << endl;
+	Geaca g2(2, "Octombrie", PLOAIE, 150.0);
+	g2.afisare();
+	Geaca g3(3, "Toamna", BLUGI, 200.0);
+	cout << endl << "Geaca 3 " << endl;
+	g3.afisare();
+
+	cout << endl << "-----------AL DOILEA OBIECT-----------" << endl;
+	cout << endl << "Cardigan 1 " << endl;
+	Cardigan c;
+	c.afisare();
+	cout << endl << "Cardigan 2 " << endl;
+	Cardigan c2(2, "Noiembrie", POLYESTER, 80.0);
+	c2.afisare();
+	cout << endl << "Cardigan 3 " << endl;
+	Cardigan c3(3, "Iarna", COTON, 120.0);
+	c3.afisare();	
+
+	cout << endl << "-----------AL TREILEA OBIECT-----------" << endl;
+	cout << endl << "Cingatoare 1 " << endl;
+	Cingatoare ci;
+	ci.afisare();
+	cout << endl << "Cingatoare 2 " << endl;
+	Cingatoare ci2(2, "Modern", PIELE, 90.0);
+	ci2.afisare();
+	cout << endl << "Cingatoare 3 " << endl;
+	Cingatoare ci3(3, "Elegant", LANA, 130.0);
+	ci3.afisare();
+
+	return 0;
+}
