@@ -10,24 +10,30 @@ enum Model {
 
 class Geaca {
 public:
-	int serie;
+	int serie = 0;
+	const int versiune;
 	char* colectie = nullptr;
 	Model model;
-	float pret;
+	float pret = 0;
+	static int contor;
 
-	Geaca() {
+	Geaca() :versiune(Geaca::contor++){
 		const char* defaultColectie = "Martie";
 		serie = 1;
 		colectie = new char[strlen(defaultColectie) + 1];
-		strcpy_s(colectie, strlen(defaultColectie) +1, defaultColectie);
+		strcpy_s(colectie, strlen(defaultColectie) + 1, defaultColectie);
 		this->model = BOMBER;
 		this->pret = 100.0;
 	}
 
-	Geaca(int serie, const char * colectie, Model model, float pret) {
+	Geaca(int serie, const char* colectie, Model model, float pret) :versiune(Geaca::contor++) {
 		this->serie = serie;
 		this->colectie = new char[strlen(colectie) + 1];
 		strcpy_s(this->colectie, strlen(colectie) + 1, colectie);
+		this->model = model;
+		this->pret = pret;
+	}
+	Geaca(Model model, float pret) :versiune(Geaca::contor++) {
 		this->model = model;
 		this->pret = pret;
 	}
@@ -38,7 +44,15 @@ public:
 		cout << "Este Modelul: " << this->model << endl;
 		cout << "Si are Pretul de: " << this->pret << " RON" << endl;
 	}
+
+	~Geaca() {
+		if (this->colectie != nullptr) {
+			delete[] this->colectie;
+			this->colectie = nullptr;
+		}
+	}
 };
+int Geaca::contor = 0;
 
 enum matCardigan {
 	MIXT, POLYESTER, COTON
@@ -47,10 +61,12 @@ enum matCardigan {
 class Cardigan {
 public:
 	int serie;
+	const int versiune;
 	char* colectie = nullptr;
 	matCardigan material;
 	float pret;
-	Cardigan() {
+	static int contor;
+	Cardigan() :versiune(Cardigan::contor++) {
 		const char* defaultColectie = "Aprilie";
 		serie = 1;
 		colectie = new char[strlen(defaultColectie) + 1];
@@ -58,11 +74,15 @@ public:
 		this->material = MIXT;
 		this->pret = 60.0;
 	}
-	Cardigan(int serie, const char* colectie,matCardigan material, float pret) {
+	Cardigan(int serie, const char* colectie, matCardigan material, float pret) :versiune(Cardigan::contor++) {
 		this->serie = serie;
 		this->colectie = new char[strlen(colectie) + 1];
 		strcpy_s(this->colectie, strlen(colectie) + 1, colectie);
 		this->material = material;
+		this->pret = pret;
+	}
+	Cardigan(int serie, float pret) :versiune(Cardigan::contor++) {
+		this->serie = serie;
 		this->pret = pret;
 	}
 	void afisare() {
@@ -71,7 +91,14 @@ public:
 		cout << "Este facut din: " << this->material << endl;
 		cout << "Si are Pretul de: " << this->pret << " RON" << endl;
 	}
+	~Cardigan() {
+		if (this->colectie != nullptr) {
+			delete[] this->colectie;
+			this->colectie = nullptr;
+		}
+	}
 };
+int Cardigan::contor = 0;
 
 enum matCingatoare {
 	BUMBAC, PIELE, LANA
@@ -80,10 +107,12 @@ enum matCingatoare {
 class Cingatoare {
 public:
 	int serie;
+	const int versiune;
 	char* colectie = nullptr;
 	matCingatoare materialC;
 	float pret;
-	Cingatoare() {
+	static int contor;
+	Cingatoare() :versiune(Cingatoare::contor++) {
 		const char* defaultColectie = "Traditional";
 		serie = 1;
 		colectie = new char[strlen(defaultColectie) + 1];
@@ -91,11 +120,15 @@ public:
 		this->materialC = BUMBAC;
 		this->pret = 60.0;
 	}
-	Cingatoare(int serie, const char* colectie, matCingatoare material, float pret) {
+	Cingatoare(int serie, const char* colectie, matCingatoare material, float pret) :versiune(Cingatoare::contor++) {
 		this->serie = serie;
 		this->colectie = new char[strlen(colectie) + 1];
 		strcpy_s(this->colectie, strlen(colectie) + 1, colectie);
 		this->materialC = material;
+		this->pret = pret;
+	}
+	Cingatoare(int serie, float pret) :versiune(Cingatoare::contor++) {
+		this->serie = serie;
 		this->pret = pret;
 	}
 	void afisare() {
@@ -104,13 +137,21 @@ public:
 		cout << "Este facut din: " << this->materialC << endl;
 		cout << "Si are Pretul de: " << this->pret << " RON" << endl;
 	}
+	~Cingatoare() {
+		if (this->colectie != nullptr) {
+			delete[] this->colectie;
+			this->colectie = nullptr;
+		}
+	}
 };
+
+int Cingatoare::contor = 0;
 
 int main() {
 	cout << "-----------DOMENIUL ALES : IMBRACAMINTE-----------" << endl;
 	cout << endl << "-----------PRIMUL OBIECT-----------" << endl;
 	cout << "Geaca 1 " << endl;
-	Geaca g; 
+	Geaca g;
 	g.afisare();
 	cout << endl << "Geaca 2 " << endl;
 	Geaca g2(2, "Octombrie", PLOAIE, 150.0);
@@ -128,7 +169,7 @@ int main() {
 	c2.afisare();
 	cout << endl << "Cardigan 3 " << endl;
 	Cardigan c3(3, "Iarna", COTON, 120.0);
-	c3.afisare();	
+	c3.afisare();
 
 	cout << endl << "-----------AL TREILEA OBIECT-----------" << endl;
 	cout << endl << "Cingatoare 1 " << endl;
